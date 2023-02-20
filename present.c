@@ -23,26 +23,26 @@ int main() {
     struct Info info;
     struct Info info1;
 
-    printf("I am here\n");
-
     info.name = "mert";
     info.age = 24;
-    pthread_create(&pthread, NULL, &printInfo, &info);
 
-    printf("I am here again\n");
+    /*
+    * 1. Pass address of thread handler
+    * 2. If thread's attributes are not going to set, pass NULL
+    * 3. Pass callback function
+    * 4. Pass data
+    */
+    pthread_create(&pthread, NULL, &printInfo, &info);
 
     info1.name = "busra";
     info1.age = 27;
     pthread_create(&pthread1, NULL, &printInfo, &info1);
 
-    printf("I am not here\n");
-
+    /*
+    * Join main thread with passed thread_id, main thread stops until joined thread finishes its execution.
+    */
     pthread_join(pthread, NULL);
     pthread_join(pthread1, NULL);
     
-    printf("I am finished\n");
-
-    //pthread_exit(0);
-
     return 0;
 }
